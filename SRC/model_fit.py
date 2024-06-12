@@ -6,7 +6,7 @@ from sklearn.compose import ColumnTransformer
 from xgboost import XGBRegressor
 from sklearn.model_selection import cross_validate
 from sklearn.metrics import r2_score
-from SRC.get_sales_data import get_sales_data_f
+from GET_SALES_DATA import get_sales_data_f
 
 # Файл одновременно для проекта и для домашних заданий. Много функций чтобы их не дублировать
 def make_lags(ts, lags):

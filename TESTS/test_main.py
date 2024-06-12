@@ -1,6 +1,6 @@
 import allure
 from sklearn.utils.validation import check_is_fitted
-from SRC.get_sales_data import get_sales_data_f
+from SRC.GET_SALES_DATA import get_sales_data_f
 from SRC.model_fit import pipeline_fit
 from sklearn.exceptions import NotFittedError
 
