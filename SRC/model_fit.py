@@ -1,4 +1,4 @@
-import  pandas as pd
+import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
@@ -55,14 +55,6 @@ def get_preprocessors():
 def get_model():
     # Определение модели
     return XGBRegressor()
-def pipeline_fit(model, preprocessors, X_train, y_train):
-    # Соберем пайплайн
-    pipe = Pipeline([
-        ('preprocessors', preprocessors),
-        ('model', model)])
-    # Запустим обработку пайплайна
-    pipe.fit(X_train, y_train)
-    return pipe
 
 def cross_validation(X, y, model, cv_rule):
     # Кросс - валидация
@@ -80,11 +72,12 @@ def calculate_metric(model_pipe, X, y, metric = r2_score, **kwargs):
     y_model = model_pipe.predict(X)
     return metric(y, y_model, **kwargs)
 
-if __name__ == "__main__":
+def pipeline_fit(top=0):
     # Получение данных из postgress
-    df_sales = get_sales_data_f()
+    df_sales = get_sales_data_f(top=0)
     # Генерация признаков
     df_dataset = get_add_features(df_sales)
+    # Запустим обработку пайплайна
     # Сформируем наборы данных для обучения и проверки
     df_train, df_test = train_test_split(df_dataset,
                                          test_size=0.3,
@@ -93,7 +86,15 @@ if __name__ == "__main__":
     preprocessors = get_preprocessors()
     # Модель
     model = get_model()
+    # Соберем пайплайн
+    pipe = Pipeline([
+        ('preprocessors', preprocessors),
+        ('model', model)])
     # Разбивка на признаки и целевую переменную
     x, y, dates = split_x_y(df_train)
+    pipe.fit(x, y)
+    return pipe
+
+if __name__ == "__main__":
     # Обучение
-    pipe = pipeline_fit(model, preprocessors, x, y)
+    pipeline = pipeline_fit()

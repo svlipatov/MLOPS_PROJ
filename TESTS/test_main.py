@@ -1,7 +1,7 @@
 import allure
 from sklearn.utils.validation import check_is_fitted
-from src.get_sales_data import get_sales_data_f
-from src.model_fit import pipeline_fit
+from SRC.GET_SALES_DATA import get_sales_data_f
+from SRC.model_fit import pipeline_fit
 from sklearn.exceptions import NotFittedError
 
 @allure.feature("Prediction")
