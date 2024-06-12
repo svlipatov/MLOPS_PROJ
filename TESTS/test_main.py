@@ -12,7 +12,7 @@ class TestPrediction:
     Запросить ограниченное количество данных по продажам из из postgressql
     """)
     @allure.severity(allure.severity_level.NORMAL)
-    def get_data(self):
+    def test_data_receiving(self):
         with allure.step("Запросить ограниченное количество данных по продажам из из postgressql"):
             df_sales_test = get_sales_data_f(1000)
             assert len(df_sales_test) != 0
@@ -25,7 +25,7 @@ class TestPrediction:
     Обучить модель на ограниченном количестве записей
     """)
     @allure.severity(allure.severity_level.NORMAL)
-    def get_data(self):
+    def test_model_training(self):
         with allure.step("Обучить модель на ограниченном количестве записей"):
             pipeline = pipeline_fit(1000)
             fitted = True
