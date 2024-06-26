@@ -25,7 +25,7 @@ def get_sales_data_f(top =0):
 
 if __name__ == "__main__":
     df_sales_data = get_sales_data_f()
-    print(df_sales_data)
+    print(df_sales_data.tail(30))
 
 
 
